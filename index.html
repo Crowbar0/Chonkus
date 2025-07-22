@@ -62,7 +62,7 @@ display: block;
 body {
 margin: 0;
 font-family: Arial, sans-serif;
-background: url('https://raw.githubusercontent.com/UncleBazzy/Chonkus-Site/main/images/13.jpg') no-repeat center center fixed;
+background: url('https://raw.githubusercontent.com/Crowbar0/Chonkus/main/images/13.jpg') no-repeat center center fixed;
 background-size: cover;
 color: #003366;
 display: flex;
@@ -410,15 +410,15 @@ const source = player.querySelector('source');
 const tracks = {
 opa: {
 name: "Opa Odyssey",
-src: "https://raw.githubusercontent.com/UncleBazzy/Chonkus-Site/main/Maxima.mp3"
+src: "https://raw.githubusercontent.com/Crowbar0/Chonkus/main/Maxima.mp3"
 },
 meow: {
 name: "Mystic Meow",
-src: "https://raw.githubusercontent.com/UncleBazzy/Chonkus-Site/main/Maximus.mp3"
+src: "https://raw.githubusercontent.com/Crowbar0/Chonkus/main/Maximus.mp3"
 },
 souvlaki: {
 name: "Souvlaki Samba",
-src: "https://raw.githubusercontent.com/UncleBazzy/Chonkus-Site/main/Nostalgia.mp3"
+src: "https://raw.githubusercontent.com/Crowbar0/Chonkus/main/Nostalgia.mp3"
 }
 };
 
@@ -494,7 +494,7 @@ let imgElements = [];
 
 async function loadGalleryImages() {
 try {
-const response = await fetch("https://api.github.com/repos/UncleBazzy/Chonkus-Site/contents/images");
+const response = await fetch("https://api.github.com/repos/Crowbar0/Chonkus/contents/images");
 const files = await response.json();
 const imageFiles = files.filter(file => file.type === "file" && /\.(jpe?g|png|gif)$/i.test(file.name));
 totalImages = imageFiles.length;
