@@ -258,6 +258,26 @@ color: #003366;
 text-align: center;
 }
 
+.scroll-link {
+  display: inline-block;
+  padding: 8px 16px;
+  margin-right: 20px;
+  background-color: #2c2f36;
+  color: #fff;
+  text-decoration: none;
+  border-radius: 8px;
+  font-family: sans-serif;
+  font-size: 14px;
+  transition: background 0.3s;
+}
+.scroll-link:hover {
+  background-color: #3d4049;
+}
+
+@keyframes scroll {
+  0% { transform: translateX(100%); }
+  100% { transform: translateX(-100%); }
+}
 </style>
 
 </head>
@@ -353,30 +373,6 @@ View Location (on Google Maps)
     <a href="https://www.augsburger-allgemeine.de/reise/griechenland/kreta-eine-katze-wird-zur-touristenattraktion-immer-mehr-urlauber-wollen-chonkus-maximus-sehen-22-7-25-110474651" target="_blank" class="scroll-link">🗺️ Augsburger Allgemeine</a>
   </div>
 </section>
-
-<style>
-.scroll-link {
-  display: inline-block;
-  padding: 8px 16px;
-  margin-right: 20px;
-  background-color: #2c2f36;
-  color: #fff;
-  text-decoration: none;
-  border-radius: 8px;
-  font-family: sans-serif;
-  font-size: 14px;
-  transition: background 0.3s;
-}
-.scroll-link:hover {
-  background-color: #3d4049;
-}
-
-@keyframes scroll {
-  0% { transform: translateX(100%); }
-  100% { transform: translateX(-100%); }
-}
-</style>
-
 
 <section style="max-width: 700px; margin: 40px auto; background: #f9f5e7; padding: 20px; border-radius: 12px; box-shadow: 0 0 10px rgba(0,0,0,0.1); color: #333;">
 <h2>🧾 Taverna Review Board</h2>
