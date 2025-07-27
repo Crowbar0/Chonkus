@@ -305,6 +305,13 @@ referrerpolicy="no-referrer-when-downgrade">
 </iframe>
 </div>
 
+  <section id="pfp-generator" style="text-align:center; margin: 40px auto;">
+  <h2>🏛️ Chonkus Laurel Wreath PFP Generator</h2>
+  <input type="file" id="upload" accept="image/*"><br><br>
+  <canvas id="canvas" width="500" height="500"></canvas><br><br>
+  <button onclick="downloadImage()">Download Your PFP</button>
+</section>
+
 <!-- 🎼 Chonkus Jukebox -->
 <section style="text-align:center; margin: 40px auto; max-width: 600px; background: #fff4e6; padding: 20px; border-radius: 12px; box-shadow: 0 0 12px rgba(0,0,0,0.1);">
 <h2>🎼 Chonkus Jukebox</h2>
@@ -648,6 +655,43 @@ const randomIndex = Math.floor(Math.random() * fortunes.length);
 fortuneText.textContent = fortunes[randomIndex];
 });
 </script>
+
+  <script>
+  const upload = document.getElementById('upload');
+  const canvas = document.getElementById('canvas');
+  const ctx = canvas.getContext('2d');
+
+  const overlay = new Image();
+  overlay.src = 'wreath.png'; // Path to your laurel wreath PNG
+
+  upload.addEventListener('change', (e) => {
+    const reader = new FileReader();
+    reader.onload = function(event) {
+      const img = new Image();
+      img.onload = function() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+        if (overlay.complete) {
+          ctx.drawImage(overlay, 0, 0, canvas.width, canvas.height);
+        } else {
+          overlay.onload = () => {
+            ctx.drawImage(overlay, 0, 0, canvas.width, canvas.height);
+          };
+        }
+      };
+      img.src = event.target.result;
+    };
+    reader.readAsDataURL(e.target.files[0]);
+  });
+
+  function downloadImage() {
+    const link = document.createElement('a');
+    link.download = 'chonkus_pfp.png';
+    link.href = canvas.toDataURL();
+    link.click();
+  }
+</script>
+
 
 </body>
 </html>
