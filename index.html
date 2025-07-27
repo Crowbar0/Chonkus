@@ -691,7 +691,7 @@ fortuneText.textContent = fortunes[randomIndex];
   const upload = document.getElementById('upload');
 
   const wreath = new Image();
-  wreath.src = 'wreath.png'; // Make sure this path is correct
+  wreath.src = 'https://raw.githubusercontent.com/Crowbar0/Chonkus/main/Wreath.png';
 
   let pfpImage = null;
   let wreathX = 0;
@@ -726,7 +726,48 @@ fortuneText.textContent = fortunes[randomIndex];
   canvas.addEventListener('mousedown', (e) => {
     const rect = canvas.getBoundingClientRect();
     const x = e.clientX - rect.left;
-    cons
+    const y = e.clientY - rect.top;
+
+    // Simple hit detection — assumes full canvas-sized overlay
+    if (
+      x >= wreathX &&
+      x <= wreathX + canvas.width &&
+      y >= wreathY &&
+      y <= wreathY + canvas.height
+    ) {
+      dragging = true;
+      offsetX = x - wreathX;
+      offsetY = y - wreathY;
+    }
+  });
+
+  canvas.addEventListener('mousemove', (e) => {
+    if (dragging) {
+      const rect = canvas.getBoundingClientRect();
+      wreathX = e.clientX - rect.left - offsetX;
+      wreathY = e.clientY - rect.top - offsetY;
+      drawCanvas();
+    }
+  });
+
+  canvas.addEventListener('mouseup', () => {
+    dragging = false;
+  });
+
+  canvas.addEventListener('mouseleave', () => {
+    dragging = false;
+  });
+
+  function downloadImage() {
+    const link = document.createElement('a');
+    link.download = 'chonkus_pfp.png';
+    link.href = canvas.toDataURL();
+    link.click();
+  }
+
+  // Redraw when wreath finishes loading
+  wreath.onload = () => drawCanvas();
+</script>
 
 </body>
 </html>
