@@ -277,7 +277,28 @@ text-align: center;
   0% { transform: translateX(100%); }
   100% { transform: translateX(-100%); }
 }
-  
+  input[type="file"] {
+  display: none;
+}
+
+.custom-file-upload {
+  display: inline-block;
+  padding: 12px 20px;
+  font-size: 18px;
+  font-weight: bold;
+  color: #fff;
+  background-color: #4CAF50;
+  border-radius: 8px;
+  cursor: pointer;
+  border: none;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+.custom-file-upload:hover {
+  background-color: #45a049;
+  transform: scale(1.03);
+}
+ 
 </style>
 </head>
 <body>
@@ -307,7 +328,11 @@ referrerpolicy="no-referrer-when-downgrade">
 
 <section id="pfp-generator" style="text-align:center; margin: 40px auto;">
   <h2>🎨 Chonkus Laurel Wreath PFP Generator</h2>
-  <input type="file" id="upload" accept="image/*"><br>
+ <label for="upload" class="custom-file-upload">
+  📁 Upload Your Profile Picture
+</label>
+<input type="file" id="upload" accept="image/*" />
+ id="upload" accept="image/*"><br>
   <canvas id="canvas" width="500" height="500"></canvas><br>
   <button onclick="downloadImage()">Download Your PFP</button>
 </section>
