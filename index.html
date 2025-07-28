@@ -685,7 +685,7 @@ fortuneText.textContent = fortunes[randomIndex];
 });
 </script>
 
-  <script>
+<script>
   const canvas = document.getElementById('canvas');
   const ctx = canvas.getContext('2d');
   const upload = document.getElementById('upload');
@@ -694,8 +694,13 @@ fortuneText.textContent = fortunes[randomIndex];
   wreath.src = 'https://raw.githubusercontent.com/Crowbar0/Chonkus/main/Wreath.png';
 
   let pfpImage = null;
-  let wreathX = 0;
+
+  // Wreath position and size
+  let wreathX = 50;
   let wreathY = 0;
+  let wreathWidth = 400;
+  let wreathHeight = 150;
+
   let dragging = false;
   let offsetX = 0;
   let offsetY = 0;
@@ -705,16 +710,14 @@ fortuneText.textContent = fortunes[randomIndex];
     if (pfpImage) {
       ctx.drawImage(pfpImage, 0, 0, canvas.width, canvas.height);
     }
-    if (wreath.complete) {
-      ctx.drawImage(wreath, wreathX, wreathY, canvas.width, canvas.height);
-    }
+    ctx.drawImage(wreath, wreathX, wreathY, wreathWidth, wreathHeight);
   }
 
   upload.addEventListener('change', (e) => {
     const reader = new FileReader();
-    reader.onload = function(event) {
+    reader.onload = function (event) {
       const img = new Image();
-      img.onload = function() {
+      img.onload = function () {
         pfpImage = img;
         drawCanvas();
       };
@@ -728,12 +731,9 @@ fortuneText.textContent = fortunes[randomIndex];
     const x = e.clientX - rect.left;
     const y = e.clientY - rect.top;
 
-    // Simple hit detection — assumes full canvas-sized overlay
     if (
-      x >= wreathX &&
-      x <= wreathX + canvas.width &&
-      y >= wreathY &&
-      y <= wreathY + canvas.height
+      x >= wreathX && x <= wreathX + wreathWidth &&
+      y >= wreathY && y <= wreathY + wreathHeight
     ) {
       dragging = true;
       offsetX = x - wreathX;
@@ -750,13 +750,8 @@ fortuneText.textContent = fortunes[randomIndex];
     }
   });
 
-  canvas.addEventListener('mouseup', () => {
-    dragging = false;
-  });
-
-  canvas.addEventListener('mouseleave', () => {
-    dragging = false;
-  });
+  canvas.addEventListener('mouseup', () => { dragging = false; });
+  canvas.addEventListener('mouseleave', () => { dragging = false; });
 
   function downloadImage() {
     const link = document.createElement('a');
@@ -765,8 +760,10 @@ fortuneText.textContent = fortunes[randomIndex];
     link.click();
   }
 
-  // Redraw when wreath finishes loading
-  wreath.onload = () => drawCanvas();
+  // Ensure wreath is drawn only after it's loaded
+  wreath.onload = () => {
+    drawCanvas();
+  };
 </script>
 
 </body>
