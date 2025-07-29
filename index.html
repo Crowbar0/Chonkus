@@ -7,81 +7,12 @@
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-VRmA36kHmBDLQO9evYghMrcWg3eA7UdMkNn4qkY7s7E=" crossorigin="" />
 <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&display=swap" rel="stylesheet">
 <style>
-.gallery-fade img {
-  opacity: 0;
-  transition: opacity 0.8s ease-in-out;
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: auto;
-  border-radius: 12px;
-}
-.gallery-fade img.active {
-  opacity: 1;
-  position: relative;
-  z-index: 1;
-}
-#fortuneText {
-  transition: opacity 0.6s ease, transform 0.6s ease;
-  opacity: 0;
-  transform: translateY(10px);
-}
-#fortuneText.visible {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-.tab-content {
-  opacity: 0;
-  transform: translateY(10px);
-  transition: opacity 0.5s ease, transform 0.5s ease;
-  display: none;
-}
-.tab-content.active {
-  display: block;
-  opacity: 1;
-  transform: translateY(0);
-}
-
-@media (max-width: 768px) {
-  .tab-buttons button {
-    width: 100%;
-    margin: 8px 0;
-  }
-  h1 {
-    flex-direction: column;
-    gap: 5px;
-    font-size: 1.8rem;
-  }
-  .overlay {
-    padding: 20px;
-  }
-  .gallery-controls {
-    justify-content: space-around !important;
-  }
-  canvas {
-    width: 100% !important;
-    height: auto !important;
-  }
-  .button, button {
-    width: 100%;
-    box-sizing: border-box;
-  }
-}
-
-:root {
-  --blue-primary: #0a66c2;
-  --blue-light: #d0e8ff;
-  --white: #ffffff;
-  --accent-yellow: #ffd700;
-}
-
+/* Cartoonish Theme Enhancements */
 body {
-  margin: 0;
-  font-family: Arial, sans-serif;
+  font-family: 'Comic Sans MS', 'Comic Neue', cursive, sans-serif;
   background: url('https://raw.githubusercontent.com/Crowbar0/Chonkus/main/New%20Chonkus%20Banner.jpg') no-repeat center center fixed;
   background-size: cover;
+  background-size: 300px;
   color: var(--blue-primary);
   display: flex;
   justify-content: center;
