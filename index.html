@@ -6,6 +6,7 @@
 <title>Chonkus Maximus Community</title>
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-VRmA36kHmBDLQO9evYghMrcWg3eA7UdMkNn4qkY7s7E=" crossorigin="" />
 <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka&display=swap" rel="stylesheet">
 <style>
 /* Cartoonish Theme Enhancements */
 body {
@@ -109,6 +110,19 @@ footer {
   color: #666;
   text-align: center;
 }
+  
+  .chonkus-intro {
+  font-size: 1.4rem;
+  line-height: 1.9;
+  font-family: 'Fredoka', sans-serif;
+  color: #222;
+  background-color: rgba(255, 255, 255, 0.9);
+  padding: 24px;
+  border-radius: 16px;
+  box-shadow: 0 0 12px rgba(0,0,0,0.1);
+  margin-bottom: 30px;
+}
+
 </style>
 </head>
 <body>
@@ -157,11 +171,11 @@ footer {
     <button onclick="showTab('youtube')">🎬 YouTube</button>
   </div>
 
-<div id="intro" class="tab-content active" style="font-family: 'Chewy', cursive, sans-serif;">
-    <h2>🏛️ Welcome</h2>
-   ><strong>Behold:</strong> <em>Chonkus Maximus</em> — legendary street cat, sunbather, tavern inspector, and undisputed Lord of the Laneways of Crete. The only cat with a Google Maps landmark to his name, complete with 5 star reviews! With paws like pita bread and a belly that echoes through the mountains, Chonkus has achieved local fame and global meme status — all without leaving his patch of cobblestone real estate.</p>
-<p>He's not just fat. He's an <strong>institution</strong>. Rumor has it he once slept through an earthquake, meowed at a ghost, and demanded a fish from a priest — and got it. Now, his fan club is growing faster than his waistline. Welcome to the hub of all things Chonkus 🐈‍⬛🇬🇷</p>
-  </div>
+<div class="chonkus-intro">
+  <p><strong>Behold:</strong> <em>Chonkus Maximus</em> — legendary street cat, sunbather, tavern inspector, and undisputed Lord of the Laneways of Crete. The only cat with a Google Maps landmark to his name, complete with 5 star reviews! With paws like pita bread and a belly that echoes through the mountains, Chonkus has achieved local fame and global meme status — all without leaving his patch of cobblestone real estate.</p>
+  <p>He's not just fat. He's an <strong>institution</strong>. Rumor has it he once slept through an earthquake, meowed at a ghost, and demanded a fish from a priest — and got it. Now, his fan club is growing faster than his waistline. Welcome to the hub of all things Chonkus 🐈‍⬛🇬🇷</p>
+</div>
+
 
   <div id="map" class="tab-content">
     <h2>📍 Chonkus Location</h2>
