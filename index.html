@@ -7,6 +7,31 @@
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-VRmA36kHmBDLQO9evYghMrcWg3eA7UdMkNn4qkY7s7E=" crossorigin="" />
 <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&display=swap" rel="stylesheet">
 <style>
+.gallery-fade img {
+  opacity: 0;
+  transition: opacity 0.8s ease-in-out;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: auto;
+  border-radius: 12px;
+}
+.gallery-fade img.active {
+  opacity: 1;
+  position: relative;
+  z-index: 1;
+}
+#fortuneText {
+  transition: opacity 0.6s ease, transform 0.6s ease;
+  opacity: 0;
+  transform: translateY(10px);
+}
+#fortuneText.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
 .tab-content {
   opacity: 0;
   transform: translateY(10px);
@@ -71,7 +96,7 @@ body {
   width: 100%;
   max-width: 1000px;
   box-shadow: 0 0 20px rgba(0,0,0,0.2);
-  background-image: url('https://raw.githubusercontent.com/Crowbar0/Chonkus/main/New Chonkus Banner.jpg');
+  background-image: url('https://upload.wikimedia.org/wikipedia/commons/thumb/a/ad/Greek_Key.svg/512px-Greek_Key.svg.png');
   background-repeat: repeat-x;
   background-size: 20px auto;
   background-position: bottom center;
@@ -439,8 +464,13 @@ const fortunes = [
   "A sunbeam will find you when you need it most."
 ];
 document.getElementById("fortuneBtn").addEventListener("click", () => {
+  const fortuneText = document.getElementById("fortuneText");
   const randomIndex = Math.floor(Math.random() * fortunes.length);
-  document.getElementById("fortuneText").textContent = fortunes[randomIndex];
+  fortuneText.classList.remove("visible");
+  setTimeout(() => {
+    fortuneText.textContent = fortunes[randomIndex];
+    fortuneText.classList.add("visible");
+  }, 100);
 });
 // Jukebox Script
 const jukebox = document.getElementById('jukeboxSelect');
