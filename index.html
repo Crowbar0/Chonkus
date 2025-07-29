@@ -158,18 +158,18 @@ footer {
     </a>
   </section>
 
-  <div class="tab-buttons">
-    <button onclick="showTab('intro')">🏛️ Intro</button>
-    <button onclick="showTab('map')">📍 Location</button>
-    <button onclick="showTab('pfp')">🎨 PFP Maker</button>
-    <button onclick="showTab('jukebox')">🎼 Jukebox</button>
-    <button onclick="showTab('press')">📰 Press</button>
-    <button onclick="showTab('reviews')">🧾 Reviews</button>
-    <button onclick="showTab('gallery')">📸 Gallery</button>
-    <button onclick="showTab('tales')">📝 Tales</button>
-    <button onclick="showTab('fortune')">🔮 Fortune</button>
-    <button onclick="showTab('youtube')">🎬 YouTube</button>
-  </div>
+<div id="tab-section">
+  <button onclick="showTab('intro'); scrollToTabs()">🏛️ Intro</button>
+  <button onclick="showTab('map'); scrollToTabs()">📍 Location</button>
+  <button onclick="showTab('pfp'); scrollToTabs()">🎨 PFP Maker</button>
+  <button onclick="showTab('jukebox'); scrollToTabs()">🎼 Jukebox</button>
+  <button onclick="showTab('press'); scrollToTabs()">📰 Press</button>
+  <button onclick="showTab('reviews'); scrollToTabs()">🧾 Reviews</button>
+  <button onclick="showTab('gallery'); scrollToTabs()">📸 Gallery</button>
+  <button onclick="showTab('tales'); scrollToTabs()">📝 Tales</button>
+  <button onclick="showTab('fortune'); scrollToTabs()">🔮 Fortune</button>
+  <button onclick="showTab('youtube'); scrollToTabs()">🎬 YouTube</button>
+</div>
 
 <div class="chonkus-intro">
   <p><strong>Behold:</strong> <em>Chonkus Maximus</em> — legendary street cat, sunbather, tavern inspector, and undisputed Lord of the Laneways of Crete. The only cat with a Google Maps landmark to his name, complete with 5 star reviews! With paws like pita bread and a belly that echoes through the mountains, Chonkus has achieved local fame and global meme status — all without leaving his patch of cobblestone real estate.</p>
@@ -287,11 +287,15 @@ footer {
 </div>
 <script>
 // Tab control
-function showTab(id) {
-  const tabs = document.querySelectorAll('.tab-content');
-  tabs.forEach(tab => tab.classList.remove('active'));
-  document.getElementById(id).classList.add('active');
+function scrollToTabs() {
+  const section = document.getElementById('tab-section');
+  if (section) {
+    const yOffset = -80; // Adjust this offset if needed
+    const y = section.getBoundingClientRect().top + window.pageYOffset + yOffset;
+    window.scrollTo({ top: y, behavior: 'smooth' });
+  }
 }
+
 // PFP Script
 const canvas = document.getElementById('canvas');
 const ctx = canvas.getContext('2d');
