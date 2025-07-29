@@ -287,12 +287,14 @@ footer {
 </div>
 <script>
 // Tab control
-function scrollToTabs() {
-  const section = document.getElementById('tab-section');
-  if (section) {
-    const yOffset = -80; // Adjust this offset if needed
-    const y = section.getBoundingClientRect().top + window.pageYOffset + yOffset;
-    window.scrollTo({ top: y, behavior: 'smooth' });
+function showTab(tabId) {
+  const tabs = document.querySelectorAll('.tab-content');
+  tabs.forEach(tab => {
+    tab.classList.remove('active');
+  });
+  const target = document.getElementById(tabId);
+  if (target) {
+    target.classList.add('active');
   }
 }
 
