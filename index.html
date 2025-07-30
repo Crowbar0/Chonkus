@@ -16,6 +16,7 @@
       border-radius: 12px;
       margin-top: 20px;
       max-width: 90vw;
+      cursor: grab;
     }
     .custom-file-upload {
       display: inline-block;
@@ -38,7 +39,6 @@
     input[type="file"] {
       display: none;
     }
-  </style>
 
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -349,141 +349,82 @@ function showTab(tabId) {
 }
 
 // PFP Script
-    const canvas = document.getElementById('canvas');
-    const ctx = canvas.getContext('2d');
-    const upload = document.getElementById('upload');
+<script>
+  const canvas = document.getElementById('canvas');
+  const ctx = canvas.getContext('2d');
+  const upload = document.getElementById('upload');
 
-    let pfpImage = null;
-    let wreath = new Image();
-    wreath.src = 'https://raw.githubusercontent.com/Crowbar0/Chonkus/main/Wreath.png';
-    
-    let draggingWreath = false;
-    let wreathX = 50, wreathY = 50, wreathWidth = 400, wreathHeight = 400;
-    let offsetX = 0, offsetY = 0;
+  const wreath = new Image();
+  wreath.src = 'https://raw.githubusercontent.com/Crowbar0/Chonkus/main/Wreath.png';
 
-    upload.addEventListener('change', (e) => {
-      const reader = new FileReader();
-      reader.onload = function (event) {
-        const img = new Image();
-        img.onload = function () {
-          pfpImage = img;
-          drawCanvas();
-        };
-        img.src = event.target.result;
-      };
-      reader.readAsDataURL(e.target.files[0]);
-    });
+  let pfpImage = null;
+  let wreathX = 50;
+  let wreathY = 0;
+  let wreathWidth = 400;
+  let wreathHeight = 150;
 
-    function drawCanvas() {
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-      if (pfpImage) {
-        ctx.drawImage(pfpImage, 0, 0, canvas.width, canvas.height);
-      }
-      ctx.drawImage(wreath, wreathX, wreathY, wreathWidth, wreathHeight);
+  let dragging = false;
+  let dragStartX, dragStartY;
+
+  function drawCanvas() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    if (pfpImage) {
+      ctx.drawImage(pfpImage, 0, 0, canvas.width, canvas.height);
     }
+    ctx.drawImage(wreath, wreathX, wreathY, wreathWidth, wreathHeight);
+  }
 
-    canvas.addEventListener('mousedown', (e) => {
-      const rect = canvas.getBoundingClientRect();
-      const x = e.clientX - rect.left;
-      const y = e.clientY - rect.top;
-
-      if (
-        x >= wreathX && x <= wreathX + wreathWidth &&
-        y >= wreathY && y <= wreathY + wreathHeight
-      ) {
-        draggingWreath = true;
-        offsetX = x - wreathX;
-        offsetY = y - wreathY;
-      }
-    });
-
-    canvas.addEventListener('mousemove', (e) => {
-      if (draggingWreath) {
-        const rect = canvas.getBoundingClientRect();
-        wreathX = e.clientX - rect.left - offsetX;
-        wreathY = e.clientY - rect.top - offsetY;
+  upload.addEventListener('change', (e) => {
+    const reader = new FileReader();
+    reader.onload = function (event) {
+      const img = new Image();
+      img.onload = function () {
+        pfpImage = img;
         drawCanvas();
-      }
-    });
+      };
+      img.src = event.target.result;
+    };
+    reader.readAsDataURL(e.target.files[0]);
+  });
 
-    canvas.addEventListener('mouseup', () => { draggingWreath = false; });
-    canvas.addEventListener('mouseleave', () => { draggingWreath = false; });
+  canvas.addEventListener('mousedown', (e) => {
+    const rect = canvas.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
 
-    function downloadImage() {
-      const link = document.createElement('a');
-      link.download = 'chonkus_pfp.png';
-      link.href = canvas.toDataURL();
-      link.click();
+    if (
+      x >= wreathX && x <= wreathX + wreathWidth &&
+      y >= wreathY && y <= wreathY + wreathHeight
+    ) {
+      dragging = true;
+      dragStartX = x - wreathX;
+      dragStartY = y - wreathY;
     }
+  });
 
-    wreath.onload = drawCanvas;
-  // Add zoom and crop controls
-let scale = 1;
-let imgX = 0;
-let imgY = 0;
-let isDraggingImg = false;
-let startX = 0;
-let startY = 0;
+  canvas.addEventListener('mousemove', (e) => {
+    if (dragging) {
+      const rect = canvas.getBoundingClientRect();
+      wreathX = e.clientX - rect.left - dragStartX;
+      wreathY = e.clientY - rect.top - dragStartY;
+      drawCanvas();
+    }
+  });
 
-canvas.addEventListener('wheel', (e) => {
-  e.preventDefault();
-  const delta = e.deltaY > 0 ? -0.1 : 0.1;
-  scale = Math.max(0.5, Math.min(3, scale + delta));
-  drawCanvas();
-});
+  canvas.addEventListener('mouseup', () => { dragging = false; });
+  canvas.addEventListener('mouseleave', () => { dragging = false; });
 
-canvas.addEventListener('mousedown', (e) => {
-  const rect = canvas.getBoundingClientRect();
-  const x = e.clientX - rect.left;
-  const y = e.clientY - rect.top;
-
-  // Check if user clicked on wreath area first
-  if (x >= wreathX && x <= wreathX + wreathWidth && y >= wreathY && y <= wreathY + wreathHeight) {
-    dragging = true;
-    offsetX = x - wreathX;
-    offsetY = y - wreathY;
-  } else {
-    isDraggingImg = true;
-    startX = x - imgX;
-    startY = y - imgY;
+  function downloadImage() {
+    const link = document.createElement('a');
+    link.download = 'chonkus_pfp.png';
+    link.href = canvas.toDataURL();
+    link.click();
   }
-});
 
-canvas.addEventListener('mousemove', (e) => {
-  const rect = canvas.getBoundingClientRect();
-  const x = e.clientX - rect.left;
-  const y = e.clientY - rect.top;
-
-  if (dragging) {
-    wreathX = x - offsetX;
-    wreathY = y - offsetY;
+  wreath.onload = () => {
     drawCanvas();
-  } else if (isDraggingImg) {
-    imgX = x - startX;
-    imgY = y - startY;
-    drawCanvas();
-  }
-});
+  };
 
-canvas.addEventListener('mouseup', () => {
-  dragging = false;
-  isDraggingImg = false;
-});
-
-canvas.addEventListener('mouseleave', () => {
-  dragging = false;
-  isDraggingImg = false;
-});
-
-function drawCanvas() {
-  ctx.clearRect(0, 0, canvas.width, canvas.height);
-  if (pfpImage) {
-    const scaledWidth = canvas.width * scale;
-    const scaledHeight = canvas.height * scale;
-    ctx.drawImage(pfpImage, imgX, imgY, scaledWidth, scaledHeight);
-  }
-  ctx.drawImage(wreath, wreathX, wreathY, wreathWidth, wreathHeight);
-}
 // Gallery script
 const galleryImages = document.getElementById("galleryImages");
 let index = 0;
